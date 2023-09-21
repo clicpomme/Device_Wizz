@@ -1,0 +1,288 @@
+//
+//  ContentView.swift
+//  Quizz test 2
+//
+//  Created by rich clicpomme.com on 2023-07-28.
+//
+import SwiftUI
+
+struct Question: Identifiable {
+    let id = UUID()
+    let text: String
+    let options: [String]
+    let allowsMultipleAnswers: Bool
+    let correctAnswerIndices: [Int]
+}
+
+struct ContentView: View {
+    @State private var questions: [Question] = [
+        Question(text: "Which iPadOS setting should you set to control the maximum decibel level so that itʼs comfortable to use your iPad with headphones?", options: ["Sounds", "General > Audio", "Control Center > Audio", "Accessibility > Audio/Visual"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+                Question(text: "How much free iCloud storage do Managed Apple IDs that are created with Apple School Manager receive?", options: ["50 GB", "100 GB", "200 GB", "500 GB"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+                Question(text: "Which feature prevents unauthorized use of a remotely wiped iPhone, iPad, Apple Watch, or Mac if the device is lost or stolen?", options: ["Find My", "Face ID", "Activation Lock", "Secure Enclave"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+                Question(text: "Scenario: Aileen often works offline on her MacBook Air. When she makes changes to Pages, Numbers, and Keynote files, she relies on the autosave feature and iCloud to keep her documents updated. How does macOS handle changes to local documents that are stored in iCloud?", options: ["It caches the changes, then silently pushes them when an internet connection to the iCloud servers becomes available.", "It caches the changes locally, then sends you a message to sync with iCloud when an internet connection becomes available.", " It caches the changes and provides you with an Apple Push Notification when an internet connection to the iCloud servers is available."], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "Where can you check the real-time service status of Apple network services?", options: ["Internet Accounts settings", "About This Mac > More Info", "apple.com/support/systemstatus", "developer.apple.com/system-status"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+               Question(text: "Which macOS feature lets multiple users log in at the same time and access some of the same resources?", options: ["Touch ID", "Launchpad", "Mission Control", "Fast user switching"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+                Question(text: "Which two System Settings can you use to change your login password if you are logged in to your user account? Select two responses.", options: ["Apple ID", "Users & Groups", "Internet Accounts", "Privacy & Security", "Touch ID & Password"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 4]),
+               Question(text: "Which four options are available from the macOS Recovery window? Select four responses.", options: ["Safari", "FileVault", "Disk Utility", "Reinstall macOS", "Wireless Diagnostics", "Restore from Time Machine"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 2, 3, 5]),
+               Question(text: "Scenario: A Relocated Items folder alias appeared on your desktop after you updated macOS. Why did this folder appear after the macOS update?", options: ["Some of your filesʼ previous locations were incompatible with current macOS Security settings.", "Some files that were previously stored in iCloud were relocated because they could not be read.", "Some of your older files were created with 32-bit apps that are no longer compatible with macOS.", "You have apps on this Mac that were created by an unregistered software developer or were signed with an invalid Developer ID."], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "What happens when you revive an Intel-based Mac with Apple Configurator for Mac?", options: ["It restores the Mac to factory settings.", "It updates the firmware on the Apple T2 Security Chip.", "It installs the latest available version of macOS for the Mac.", "It installs the original version of macOS that came with the Mac."], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+               Question(text: "What should you use to revive a Mac with Apple silicon that becomes unresponsive when the macOS installation process is interrupted by a power failure?", options: ["macOS Recovery", "Apple Diagnostics", "Apple Configurator for Mac", "An external storage device"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+               Question(text: "Which feature of macOS Recovery should you use when you need to transfer files from a Mac with Apple silicon?", options: ["Disk Utility", "Share Disk", "Share Files", "Target Disk Mode"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+               Question(text: "Which feature of macOS Recovery should you use when you need to transfer files from a Mac with Apple silicon?", options: ["Disk Utility", "Share Disk", "Share Files", "Target Disk Mode"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+               Question(text: "Scenario: You want to install macOS 13 on an Intel-based MacBook Pro with the Apple T2 Security Chip using an external installer you created on a USB drive. The Mac is connected to your local network using Ethernet and you have successfully restarted the Mac into Startup Manager. Although Startup Manager allows you to select the USB drive as a startup disk, it displays the message, “Security settings do not allow this Mac to use an external startup disk.” How can you use the external USB drive as an installer without completely disabling security on this Intel- based Mac?", options: ["Turn off firmware password protection using the Startup Security Utility.", "Temporarily change the Secure Boot setting in the Startup Security Utility to medium security.", "Temporarily change the External Boot setting in the Startup Security Utility to allow booting from external media.", "Change the External Boot setting in the Startup Security Utility to allow booting from external media, and change the Secure Boot setting to medium security."], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+               Question(text: "Whatʼs the minimum amount of storage that a Shared iPad device must have?", options: ["16 GB", "32 GB", "64 GB", "128 GB"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+               Question(text: "Which four iPad models support Shared iPad? Select four responses.", options: ["iPad mini 4th generation or later", " iPad 4th generation or later", "iPad 5th generation or later", "All iPad Pro models", "All iPad Air models", "iPad Air 2 or later"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 2, 3, 5]),
+               Question(text: "Which folder is normally hidden in the Finder view of the user home folder?", options: ["Drop Box", "Library", "Preferences", "Public", "Sharing"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+               Question(text: "Which read-only folders does System Integrity Protection protect by preventing malicious software from modifying macOS files and folders?", options: ["/System, /usr, /bin, /sbin", "/Users/Shared, ~/Public", "~/Downloads, ~/Library", "/private/var, /private/etc"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "Which folder does content you download from the internet go to by default?", options: ["Desktop", "Documents", "Downloads", "Safari"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+               Question(text: "How should you open and close a file preview window after selecting a file in the Finder?", options: ["Option-click", "Control-click", "Control-Option-click", "Press the Space bar"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+               Question(text: "Which additional type of App Store apps can you install if you have a Mac with Apple silicon?", options: ["Apple Apps", "Rosetta-compatible apps", "Apps designed for Apple silicon", "Designed for iPhone and iPad apps"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+               Question(text: "What do you call apps designed for use on both an Intel-based Mac and a Mac with Apple silicon?", options: ["Catalyst", "Other", "Rosetta", "Universal"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+               Question(text: "Where should you configure Mail settings on iPhone?", options: ["Settings > Mail > Accounts", "Settings > Accounts > Mail", "General > Mail > Accounts", "General > Internet Accounts > Mail"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "Where should you add a Mail account on a Mac?", options: ["System Settings > Internet Accounts", "Settings > Internet Accounts", "System Settings > Mail", "Settings > Mail"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "How can you identify which messages are encrypted in the Messages app on your iPhone?", options: ["Blue messages are encrypted, green messages are not", "Green messages are encrypted, blue messages are not", "Blue messages are encrypted if you turn on encryption in Messages > Security", "Blue and green messages are encrypted if you turn on encryption in Messages > Security", "Blue indicates group messages are encrypted, green indicates the group includes unencrypted messages from non-Apple devices"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "Scenario: Nisha is experiencing odd behavior with a custom app on her iPad. Which steps should you use to generate a sysdiagnose?", options: ["Reproduce the issue, then immediately turn on debug logging.", "Reproduce the issue, press and hold the top volume button, and wait for her device to vibrate.", "Reproduce the issue, then simultaneously press and release both volume buttons and the side (or top) button for 1 to 1.5 seconds.", "Reproduce the issue, then simultaneously press and release the bottom volume button and the side (or top) button for 1 to 1.5 seconds."], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+               Question(text: "Which two ways should you use to transfer a sysdiagnose from your iPad to your Mac? Select two responses.", options: ["Sync your iPad with your Mac.", "Use AirDrop to send the log to your Mac.", "Navigate to Settings > General > Wi-Fi and choose send file.", "Put iPad in recovery mode and navigate to the sysdiagnose log."], allowsMultipleAnswers: true, correctAnswerIndices: [0, 1]),
+               Question(text: "Which tool should you use to review macOS log files?", options: ["Console", "Log Viewer", "Archive Utility", "Activity Monitor"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "What should you use to troubleshoot macOS installation issues?", options: ["Installer log", "Single user mode", "Apple Diagnostics", "macOS Recovery Assistant"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+               Question(text: "How should you turn on the firewall in System Settings on a Mac?", options: ["Go to General > Sharing > Turn On Firewall.", "Go to Internet Accounts > Turn On Firewall.", "Go to Network > Firewall, then click the slider to turn it on.", "Go to Privacy & Security > Lockdown Mode, then click Turn On."], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+         Question(text: "Which macOS firewall setting prevents a Mac from responding to any unauthorized network connections, including network diagnostic protocols such as Ping, Traceroute, and Port Scan?", options: ["Stealth mode", "Silent interface", "Private browsing", "Block all incoming connections"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "What adds cryptographic validation to the macOS startup volume that enables it to grant only files with valid signatures the ability to execute instructions or access other files?", options: ["VM volume", "Preboot volume", "Signed system volume", "Encrypted APFS volume"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+         Question(text: "Where can you find the Activation Lock status if your Mac has the Apple T2 Security Chip?", options: ["Find My > View > Devices", "About This Mac > Overview", "Privacy & Security > Privacy", "System Information > Hardware"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+         Question(text: "Which part of a configuration profile contains settings for an Apple device such as a VPN setting or Wi-Fi network?", options: ["JSON", "Payload", "Supervision", "Optimization"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+         Question(text: "Where can you find configuration profiles that are installed on iPhone or iPad devices?", options: ["Settings > Control Center > VPN & Device Management", "Settings > About > Profiles & Device Management", "Settings > General > VPN & Device Management", "Settings > Profiles & Device Management"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "What allows an administrator to standardize settings for Mac computers?", options: ["Screen Time", "Parental Controls", "Configuration Profiles", "Administrator Controls"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which number should you use to call AppleCare?", options: ["800-APLCARE", "800-APLHELP", "800-HELPAPL", "800-SUPPORT"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "At which iPhone battery capacity is it considered to be degraded?", options: ["80%", "85%", "90%", "95%"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "Which software feature reduces the time your iPhone spends fully charged to reduce the wear on your battery and improve its lifespan?", options: ["Low Power Mode", "Fastlane Charging", "Optimized Battery Life", "Optimized Battery Charging"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Which connector allows for two-way power and data exchange with accessories like the Magic Keyboard with iPad?", options: ["USB-C Connector", "Smart Connector", "Magnetic Connector", "Thunderbolt Connector"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+        Question(text: "Scenario: Youʼre having trouble using Face ID. You updated to the latest software version, checked Face ID & Passcode settings, and restarted the device.What other troubleshooting steps should you try? Select three responses.", options: [" Reset Face ID", "Set up “FaceID with a Mask", "Reset the TrueDepth camera", "Add an alternate appearance", "Check that nothing is covering the TrueDepth camera"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 3, 4]),
+        Question(text: "What are two reasons why Institutional Recovery Keys (IRK) are NOT recommended for institutional management of FileVault on Mac computers with Apple silicon? Select two responses.", options: ["Theyʼre difficult to remember", "It uses polytomous encryption", "Target Disk Mode is NOT supported", "Secure enclave does NOT support IRKs", "IRKs CANNOT be used to access recoveryOS"], allowsMultipleAnswers: true, correctAnswerIndices: [2, 4]),
+        Question(text: "Which three are required to have a secure token on a Mac? Select three responses.", options: ["Enable FileVault", "Change Network settings", "Approve system extensions", "Approve macOS software updates", "Install applications from unknown sources"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 2, 3]),
+        Question(text: "Who becomes the first volume owner in a Mac with Apple silicon?", options: ["The system administrator", "The organization that owns the Mac", "The MDM solution used to manage the Mac", "The user who first configures and creates an account"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "What does macOS use the bootstrap token for?", options: ["To unlock the macOS keychain", "To recover the FileVault password", "To allow standard users to install applications", "To grant a secure token to any user logging in to a Mac"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Which two methods should you use to transfer data from your current iPhone to a new iPhone using Quick Start? Select two responses.", options: ["Transfer over Wi-Fi", "Download from iCloud", "Transfer directly from your previous device", "Transfer directly from a backup using your Mac", "Select an iCloud backup from a list of options that appear"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 2]),
+        Question(text: "Whatʼs required to use Migration Assistant with two Mac computers with the same version of macOS installed?", options: ["Bluetooth must be on and Wi-Fi is optional", "Migration Assistant requires a wired connection", "Wi-Fi must be on and the Mac computers must be placed near each other", "Wi-Fi must be on and connected to the same network on both Mac computers"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which three transfer sources can you use with Migration Assistant? Select three responses.", options: ["Another Mac", "A Time Machine Backup", "Another Mac through USB connection", "A PC with the latest version of Windows installed", "A PC with any Debian-based operating system installed"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 2, 3]),
+        Question(text: "Mario is setting up a new iMac to replace his previous Mac mini. Whatʼs the name of the step in Setup Assistant that Mario should use to transfer information from his old Mac to the new one?", options: ["Time Machine", "Transfer Data", "Transfer information", "Restore from Backup"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which three devices support Activation Lock? Select three responses.", options: ["HomePod mini", "iPhone 11 Pro", "MacBook Air 13-inch (2017)", "MacBook Pro 16-inch (2019)", "Apple TV 4K (2nd generation)", "Apple Watch with watchOS 2 or later installed"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 3, 5]),
+        Question(text: "Which steps should you use to enable Activation Lock in System Settings on a Mac computer?", options: ["Click Apple ID > iCloud, then turn on Activation Lock.", "Click Apple ID > iCloud > Find my Mac, then turn on Find My Mac.", "Click Privacy & Security > Activation Lock, then turn on Activation Lock.", "Click General > About > Activation Lock, then enter your Apple ID password."], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+        Question(text: "Which type of Mac user can perform a software upgrade?", options: ["Guest", "Standard", "Sharing-only", "Local administrator"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "How should you view log files when troubleshooting an installation issue when using the macOS installer?", options: ["Choose Window > Installer Log.", "Choose Window > Recovery Log.", "Choose Utilities > Terminal, then type tail -f /private/var/log/install.log.", "Choose Utilities > Console, select Log Reports in the sidebar, and select install.log in the main window."], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "Which three are required to perform an iOS software update? Select three responses.", options: ["Internet connection", "Enough available storage", "Compatible iPhone device", "Device connected to a power source", "Mac device with the latest version installed"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 1, 2]),
+        Question(text: "Which two methods quickly and securely erase all settings, data, and apps without erasing macOS? Select two responses.", options: ["Archive Utility app", "Erase Assistant app", "System Settings > Erase All Content and Settings", "System Settings > General > Transfer or Reset > Erase All Content and Settings", "System Settings > Privacy & Security > Advanced > Erase All Content and Settings"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 3]),
+        Question(text: "Which two Mac applications can you use to update or restore an iOS device that’s in recovery mode? Select two responses.", options: ["Xcode", "iTunes", "Finder", "Terminal", "Apple Configurator"], allowsMultipleAnswers: true, correctAnswerIndices: [2, 4]),
+        Question(text: "Scenario: Youʼre upgrading iPad to the latest version of iPadOS. After about one hour, the device still displays the Apple logo with no progress bar. Which troubleshooting step should you use to resolve this issue?", options: ["Force shut down iPad and turn it back on, then follow the Setup Assistant steps.", "Connect iPad to your Mac and follow the steps in the Music app to recover it.", "Connect iPad to a power source and wait at least one hour.", "Put iPad in recovery mode and connect it to your Mac."], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "How can you change the default startup system for a Mac with Apple silicon when you start up from macOS Recovery?", options: ["Press and hold the Space bar until the Startup Options window appears. Select your startup volume. Press and hold the Option key, then click the Always Use button.", "Press and hold the Option key until the Startup Options window appears. Select your startup volume. Press and hold the Option key, then click the Always Use button.", "Press and hold the power button until the Startup Options window appears. Select your startup volume. Press and hold the Option key, then click the Always Use button.", "Quickly press the power button three times and wait for the Startup Options window to appear. Select your startup volume. Press and hold the Option key, then click the Always Use button."], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which default macOS folder should you use to store files that other accounts can read but not edit or delete?", options: ["Public folder", "Shared folder", "System folder", "Desktop folder"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "Scenario: You want to share a document privately with another account on a Mac that multiple users share. Which macOS folder should you use?", options: ["Drop Box folder", "Shared folder", "Public folder", "Users folder"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "Which setting should you use to allow an app to access Contacts?", options: ["Notifications > Contacts", "Control Center > Contacts", "Privacy & Security > Contacts", "Privacy & Security > Parental Controls > Contacts"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "How should you report an iOS app issue directly to the developer?", options: [" In the App Store, locate the app and then tap App Support.", "In the App Store, tap your account and then tap Contact Support.", "In Settings, tap App Store and then tap Submit Report to Developer", "Open the app with the issue, then press Volume Up, Volume Down, and the Side button until a dialog appears."], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "Which two methods can you use to tell if an installed app is Universal, Intel, or Apple silicon on a Mac? Select two responses.", options: ["Use Get Info", "System Information > Installations", "System Settings > General > About", "System Information > Software > Applications", "In Terminal, type checkapptype followed by the appʼs pathname"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 3, 4]),
+        Question(text: "What do you call a configuration file that specifies the attributes of an app or process on a Mac?", options: [" Property List", "Preference List", "JavaScript Object Notation", "Extensible Markup Language"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "What should you do when an app stops responding or you canʼt quit the app normally on a Mac?", options: ["In Terminal, type killall WindowServer.", " In Terminal, type kill -9 UIKitSystem.", "Force shut down the Mac.", "Force quit the app.", "Reinstall macOS."], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Scenario: The Weather app requests access to your location.What grants permission to use this data?", options: ["A daemon", "A declaration", "An entitlement", "A code signature"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which macOS feature lets you preview, rotate images, trim audio and video clips, and use Markup without opening the file?", options: ["Preview", "QuickTime", "Core Image", "Quick Look"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Scenario: You want to archive your completed Final Cut Pro projects to iCloud Drive for easy access across all your devices. Whatʼs the largest file size and maximum number of files that you can store in iCloud Drive?", options: ["50 GB or less, unlimited number of files based on available storage", "25 GB or less, unlimited number of files based on available storage", "50 GB or less, up to 50,000 files based on available storage", "5 GB or less, up to 10,000 files based on available storage"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "What can you assign to a file in the Save dialog to improve file search and organization?", options: ["Tags", "Flags", "Plug-ins", "Extensions"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "Which three types of content and settings can you restore from an iPhone backup using Apple Configurator? Select three responses.", options: ["App data", "Wallpaper", "iCloud Photos", "Purchased Media", "Home Screen layout"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 2, 4]),
+        Question(text: "Which Terminal command should you use to view the path of the current working directory?", options: ["lp", "ls", "pwd", "whereami"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which terminal command lists the APFS containers and volumes?", options: ["fsck -l", "fsck APFS -l", "diskutil -plist", "diskutil APFS list"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Which character string identifies a file as a shell script?", options: ["#!/bin/sh", " !#/bin/sh", "##/bin/sh", "#$/bin/sh"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "How do you make a shell script executable in Terminal on Mac?", options: ["chown -r -t ScriptNamr.sh", "chmod 755 ScriptName.sh", "chmod 644 ScriptName.sh", "chown 555 ScriptName.sh", "chmod =rw,+X ScriptName.sh"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+        Question(text: "Which Terminal command should you use to view the ls commandʼs manual page?", options: ["ls man", "man ls", "ls help", "manpage ls"], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+        Question(text: "Whatʼs also known as a gateway address?", options: ["DNS address", "Node address", "Public address", "Router address"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Which network protocol automatically assigns IP addresses to the devices that request one?", options: ["Domain Name System (DNS)", "Terminal emulation protocol (Telnet)", "Transmission Control Protocol (TCP)", "Dynamic Host Configuration Protocol (DHCP)"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "What should you use to create and save diagnostic reports about your Mac computerʼs wireless and network configuration?", options: ["AirPort Utility", "Network Utility", "Apple Diagnostics", "Wireless Diagnostics"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "What does it mean when a dimmed Wi-Fi menu appears in the menu bar on a Mac?", options: ["Wi-Fi is turned off and the Mac isnʼt connected to any network interface.", "Wi-Fi is turned on, but itʼs not currently associated with a wireless network.", "Wi-Fi is turned on, but another network interface is the primary network connection.", "Wi-Fi is turned on, but the network canʼt assign an IP address to the Wi-Fi interface."], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+        Question(text: "Which three sharing services can you configure in Sharing settings on a Mac? Select three responses.", options: ["Media Sharing", "Printer Sharing", "Display Sharing", "Content Caching", "Personal Web Sharing"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 1, 3]),
+        Question(text: "Which three IP addresses are considered private, local only, and nonroutable? Select three responses.", options: ["10.0.20.90", "172.16.10.1", "16.99.170.52", "192.168.10.5", "17.253.144.10"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 1, 4]),
+        Question(text: "Which option in Sharing settings automatically turns on screen sharing on a Mac?", options: ["Sidecar", "Remote Apple Events", "Remote Management", "Universal Plug and Play"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which two apps can provide on-demand screen sharing even when the screen sharing service is turned off on a Mac? Select two responses.", options: ["AirPlay", "Messages", "FaceTime", "SharePlay", "iCloud DirectConnect"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 2]),
+        Question(text: "How should you set a reminder when you want to reply to an email later on your iPhone?", options: ["Tap the forward icon, then choose when to be reminded.", "Tap the reply icon and tap Remind Me, then choose when to be reminded.", "Tap the action icon and tap Remind Me, then choose when to be reminded.", "Tap and hold the reply icon and tap Remind Me, then choose when to be reminded."], allowsMultipleAnswers: false, correctAnswerIndices: [1]),
+        Question(text: "Which Continuity feature allows you to scan documents or take photos with your iPhone and have them appear instantly on your Mac?", options: ["Notes", "Continuity Scan", "Universal Control", "Continuity Camera"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Which two settings should you configure to limit who can stream content to your Mac when AirPlay Receiver is enabled? Select two responses.", options: ["Select “Allow AirPlay for: No one”", "Select “Allow AirPlay for: Current user”", "Select “Allow AirPlay for” and enter your Apple ID", "Enable “Require password” in the AirPlay Receiver settings", "Enable “Use complex passcode” in the AirPlay Receiver settings"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 3]),
+        Question(text: "Which technology does macOS use to create full-quality printing without installing drivers?", options: ["AirPrint", "CUPS", "ePrint", "PostScript"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
+        Question(text: "Which four print protocols does macOS support? Which four iPad models support Shared iPad? Select four responses.", options: ["CUPS", "AirPrint", "AppleTalk II", "HP JetDirect", "Line Printer Daemon", "Line Printer Daemon"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 3, 4, 5]),
+        Question(text: "Where do you find log files associated with network printing issues in macOS?", options: ["/var/Logs", "system.log", "~/Library/Logs", "/private/var/log/cups"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "Which two are required to use passkeys on iPhone? Select two responses.", options: ["iOS 16 or later", "iOS 15 or later", "A15 processor or higher", "iCloud keychain turned on", "Password AutoFill turned on"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 3]),
+        Question(text: "Which security feature is available ONLY on a Mac with Apple silicon?", options: ["Secure Enclave", "FileVault Disk Encryption", "Kernel Integrity Protection (KIP)", "System Integrity Protection (SIP)"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Which two security options are available on a Mac with Apple silicon? Select two responses.", options: ["No Security", "iOS 15 or later", "Full Security", "Medium Security", "Reduced Security"], allowsMultipleAnswers: true, correctAnswerIndices: [1, 3]),
+        Question(text: "Which three are features of Appleʼs Rapid Security Response? Select three responses.", options: ["It CANNOT be uninstalled by the user.", "It ignores managed software update delays.", "It ships security fixes to users more frequently.", "It automatically applies standard software updates.", "It applies to the latest major operating-system version."], allowsMultipleAnswers: true, correctAnswerIndices: [1, 2, 3]),
+        Question(text: "Which three things happen to Shared albums in Photos when Lockdown Mode is enabled on iPhone? Select three responses.", options: ["New Shared Album invitations are blocked", "Shared albums are removed from the Photos app", "The Photos app is removed from the Home Screen", "Shared albums on other devices can still be viewed", "Shared albums are removed from your Photos library"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 1, 3]),
+        Question(text: "When should you turn on Lockdown Mode?", options: ["Youʼre setting up your kidʼs device.", "Youʼre working from an unsecured location.", "Youʼre personally targeted by sophisticated digital threats.", "Youʼre practicing everyday digital security with your device."], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
+        Question(text: "Scenario: Herland contacted you about issues obtaining 5G service on his iPhone. You confirmed that his device is compatible with the carrierʼs 5G service, in a coverage area, and using the latest version of iOS. The carrierʼs support website indicates that a carrier settings update is needed to fully support its 5G service. Where in Settings should you go to manually check for carrier settings updates on iPhone?", options: ["Cellular, then remove and re-add your eSIM", "General > About, then follow the onscreen instructions", "Software Update, then accept the carrier settings update", "Cellular, then turn off your cellular line and turn it back on"], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
+        Question(text: "What are three benefits of Feedback Assistant? Select three responses.", options: ["It lets users try prerelease software.", "It automatically creates screen recordings.", "It offers a simple filing process for reporting.", "It provides automatic on-device diagnostics.", "It allows device diagnostics directly on the devices."], allowsMultipleAnswers: true, correctAnswerIndices: [2, 3, 4]),
+        Question(text: "Which groups are eligible for an AppleCare Professional Support solution?", options: ["Help Desks", "Enterprise", "IT Departments", "Support Technicians", "iOS Support Technicians", "Mac Support Technicians"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 1, 2]),
+        // Add more questions here
+    ]
+
+    @State private var currentQuestionIndex = 0
+    @State private var score = 0
+    @State private var showResult = false
+    @State private var isAnswerCorrect: Bool? = nil
+
+    var body: some View {
+        VStack {
+            if showResult {
+                ResultView(score: score, totalQuestions: questions.count, onRestart: restartQuiz)
+            } else {
+                QuestionView(question: questions[currentQuestionIndex], currentQuestionIndex: $currentQuestionIndex, onNextQuestion: onNextQuestion, isAnswerCorrect: $isAnswerCorrect)
+            }
+        }
+        .padding()
+    }
+
+    func onNextQuestion(_ selectedAnswerIndices: [Int]) {
+        let correctAnswerIndices = questions[currentQuestionIndex].correctAnswerIndices
+        if Set(selectedAnswerIndices) == Set(correctAnswerIndices) {
+            score += 1
+            isAnswerCorrect = true
+        } else {
+            isAnswerCorrect = false
+        }
+        
+        if currentQuestionIndex < questions.count - 1 {
+            currentQuestionIndex += 1
+            isAnswerCorrect = nil // Reset isAnswerCorrect when moving to the next question
+        } else {
+            showResult = true
+        }
+    }
+    
+    func restartQuiz() {
+        currentQuestionIndex = 0
+        score = 0
+        showResult = false
+        isAnswerCorrect = nil
+    }
+}
+
+struct QuestionView: View {
+    let question: Question
+    @Binding var currentQuestionIndex: Int // Pass currentQuestionIndex as a parameter
+    let onNextQuestion: ([Int]) -> Void
+    @Binding var isAnswerCorrect: Bool?
+    @State private var selectedAnswerIndices: [Int] = []
+
+    var body: some View {
+        VStack {
+            Text(question.text)
+                .font(.headline)
+                .padding()
+
+            if question.allowsMultipleAnswers {
+                Text("Select all that apply:")
+                    .font(.subheadline)
+                    .padding(.bottom)
+            }
+
+            ForEach(0..<question.options.count, id: \.self) { index in
+                Button(action: {
+                    if isAnswerCorrect == nil {
+                        if question.allowsMultipleAnswers {
+                            if selectedAnswerIndices.contains(index) {
+                                selectedAnswerIndices.removeAll(where: { $0 == index })
+                            } else {
+                                selectedAnswerIndices.append(index)
+                            }
+                        } else {
+                            selectedAnswerIndices = [index]
+                        }
+                    }
+                }) {
+                    Text(question.options[index])
+                        .foregroundColor(Color.white) // Change the text color to white
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(getButtonBackgroundColor(for: index))
+                        .cornerRadius(8)
+                        .padding(4)
+                }
+            }
+
+            if let isAnswerCorrect = isAnswerCorrect {
+                if !isAnswerCorrect {
+                    Text(getCorrectAnswer())
+                        .foregroundColor(.red)
+                        .padding(.top)
+                } else {
+                    Text("Correct answer!")
+                        .foregroundColor(.green)
+                        .padding(.top)
+                }
+
+                Button("Next Question") {
+                    onNextQuestion(selectedAnswerIndices)
+                    selectedAnswerIndices.removeAll()
+                }
+                .padding()
+                .disabled(isAnswerCorrect == nil) // Disable the button when no answer is submitted
+            } else {
+                Button("Submit Answer") {
+                    isAnswerCorrect = checkAnswer()
+                }
+                .padding()
+                .disabled(selectedAnswerIndices.isEmpty)
+            }
+        }
+    }
+
+    private func getButtonBackgroundColor(for index: Int) -> Color {
+        if isAnswerCorrect == nil {
+            return selectedAnswerIndices.contains(index) ? .blue : .gray.opacity(0.5)
+        } else if isAnswerCorrect! && question.correctAnswerIndices.contains(index) {
+            return .green
+        } else if !isAnswerCorrect! && question.correctAnswerIndices.contains(index) {
+            return .red
+        } else {
+            return .gray.opacity(0.5)
+        }
+    }
+
+    private func checkAnswer() -> Bool {
+        let correctAnswerIndices = question.correctAnswerIndices
+        return Set(selectedAnswerIndices) == Set(correctAnswerIndices)
+    }
+
+    private func getCorrectAnswer() -> String {
+        let correctAnswerOptions = question.correctAnswerIndices.map { question.options[$0] }
+        return "Correct Answer: " + correctAnswerOptions.joined(separator: ", ")
+    }
+}
+
+struct ResultView: View {
+    let score: Int
+    let totalQuestions: Int
+    let onRestart: () -> Void
+
+    var body: some View {
+        VStack {
+            Text("Quiz Completed!")
+                .font(.title)
+
+            Text("Score: \(score) / \(totalQuestions)")
+
+            if Double(score) / Double(totalQuestions) >= 0.8 {
+                Text("Congratulations, you passed!")
+                    .foregroundColor(.green)
+                    .font(.headline)
+            } else {
+                Text("Sorry, you didn't pass.")
+                    .foregroundColor(.red)
+                    .font(.headline)
+            }
+
+            Button("Restart Quiz") {
+                onRestart()
+            }
+            .padding()
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
