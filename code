@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  Quizz test 2
+//  Quizz test 3
 //
-//  Created by Rich clicpomme.com on 2023-11-08
+//  Created by rich clicpomme.com on 2023-07-28.
 //
 import SwiftUI
 
@@ -78,7 +78,7 @@ struct ContentView: View {
         Question(text: "Scenario: You want to share a document privately with another account on a Mac that multiple users share. Which macOS folder should you use?", options: ["Drop Box folder", "Shared folder", "Public folder", "Users folder"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
         Question(text: "Which setting should you use to allow an app to access Contacts?", options: ["Notifications > Contacts", "Control Center > Contacts", "Privacy & Security > Contacts", "Privacy & Security > Parental Controls > Contacts"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
         Question(text: "How should you report an iOS app issue directly to the developer?", options: [" In the App Store, locate the app and then tap App Support.", "In the App Store, tap your account and then tap Contact Support.", "In Settings, tap App Store and then tap Submit Report to Developer", "Open the app with the issue, then press Volume Up, Volume Down, and the Side button until a dialog appears."], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
-        Question(text: "Which two methods can you use to tell if an installed app is Universal, Intel, or Apple silicon on a Mac? Select two responses.", options: ["Use Get Info", "System Information > Installations", "System Settings > General > About", "System Information > Software > Applications", "In Terminal, type checkapptype followed by the appʼs pathname"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 3, 4]),
+        Question(text: "Which two methods can you use to tell if an installed app is Universal, Intel, or Apple silicon on a Mac? Select three responses.", options: ["Use Get Info", "System Information > Installations", "System Settings > General > About", "System Information > Software > Applications", "In Terminal, type checkapptype followed by the appʼs pathname"], allowsMultipleAnswers: true, correctAnswerIndices: [0, 3, 4]),
         Question(text: "What do you call a configuration file that specifies the attributes of an app or process on a Mac?", options: [" Property List", "Preference List", "JavaScript Object Notation", "Extensible Markup Language"], allowsMultipleAnswers: false, correctAnswerIndices: [0]),
         Question(text: "What should you do when an app stops responding or you canʼt quit the app normally on a Mac?", options: ["In Terminal, type killall WindowServer.", " In Terminal, type kill -9 UIKitSystem.", "Force shut down the Mac.", "Force quit the app.", "Reinstall macOS."], allowsMultipleAnswers: false, correctAnswerIndices: [3]),
         Question(text: "Scenario: The Weather app requests access to your location.What grants permission to use this data?", options: ["A daemon", "A declaration", "An entitlement", "A code signature"], allowsMultipleAnswers: false, correctAnswerIndices: [2]),
